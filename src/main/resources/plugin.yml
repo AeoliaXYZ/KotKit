@@ -1,0 +1,4 @@
+name: KotKit
+version: '%%VER'
+main: xyz.aeolia.kotkit.KotKit
+api-version: '1.21'
