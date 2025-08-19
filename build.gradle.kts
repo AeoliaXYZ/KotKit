@@ -3,7 +3,6 @@ import org.jetbrains.gradle.ext.*
 plugins {
   kotlin("jvm") version "2.2.0"
   kotlin("plugin.serialization") version "2.2.0"
-  kotlin("kapt") version "2.2.0"
 
   id("com.gradleup.shadow") version "8.3.0"
   id("xyz.jpenilla.run-paper") version "2.3.1"
@@ -14,7 +13,7 @@ plugins {
 }
 
 group = "xyz.aeolia"
-version = "1.0.1"
+version = "1.0.2"
 
 repositories {
   mavenCentral()
@@ -30,10 +29,10 @@ repositories {
 }
 
 dependencies {
-  compileOnly("org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT")
-  compileOnly("net.md-5:bungeecord-api:1.21-R0.1-SNAPSHOT")
+  compileOnly("org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT")
+  compileOnly("net.md-5:bungeecord-api:1.17-R0.1-SNAPSHOT")
 
-  compileOnly("com.velocitypowered:velocity-api:3.4.0-SNAPSHOT")
+  compileOnly("com.velocitypowered:velocity-api:3.2.0-SNAPSHOT")
 
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
@@ -41,15 +40,15 @@ dependencies {
 }
 
 kotlin {
-  jvmToolchain(21)
+  jvmToolchain(17)
 }
 
 tasks {
   runServer {
-    minecraftVersion("1.21")
+    minecraftVersion("1.17")
   }
   runVelocity {
-    velocityVersion("3.4.0-SNAPSHOT") // must match dependency version
+    velocityVersion("3.2.0") // must match dependency version
   }
   build {
     dependsOn(shadowJar)
@@ -59,9 +58,8 @@ tasks {
     inputs.properties(props)
     filteringCharset = "UTF-8"
 
-    filesMatching(listOf("plugin.yml", "**/*.yml", "**/*.txt")) {
+    filesMatching(listOf("plugin.yml", "bungee.yml", "velocity-plugin.json")) {
       expand(props)
-      filter { it.replace("%%VER", project.version.toString()) }
     }
   }
 }
@@ -76,17 +74,6 @@ val generateTemplates = tasks.register<Copy>("generateTemplates") {
   from(templateSource)
   into(templateDest)
   expand(props)
-}
-
-tasks.processResources {
-  val props = mapOf("version" to project.version)
-
-  inputs.properties(props)
-  filteringCharset = "UTF-8"
-
-  filesMatching(listOf("plugin.yml", "bungee.yml", "velocity-plugin.json")) {
-    expand(props)
-  }
 }
 
 sourceSets {
