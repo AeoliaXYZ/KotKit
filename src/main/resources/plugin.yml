@@ -1,4 +1,5 @@
 name: KotKit
-version: '%%VER'
-main: xyz.aeolia.kotkit.KotKit
+version: '${version}'
+main: xyz.aeolia.kotkit.KotKitBukkit
 api-version: '1.21'
+author: "Asheiou"

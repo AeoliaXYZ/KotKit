@@ -1,0 +1,7 @@
+{
+  "id": "kotkit",
+  "name": "KotKit",
+  "version": "${version}",
+  "main": "xyz.aeolia.kotkit.KotKitVelocity",
+  "authors": ["Asheiou"]
+}

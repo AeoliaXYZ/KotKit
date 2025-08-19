@@ -1,0 +1,4 @@
+name: KotKit
+main: xyz.aeolia.kotkit.KotKitBungee
+version: "${version}"
+author: "Asheiou"

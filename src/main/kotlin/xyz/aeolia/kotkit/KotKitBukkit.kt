@@ -2,8 +2,7 @@ package xyz.aeolia.kotkit
 
 import org.bukkit.plugin.java.JavaPlugin
 
-class KotKit : JavaPlugin() {
-
+class KotKitBukkit : JavaPlugin() {
   override fun onEnable() {
     logger.info("KotKit enabled")
   }
